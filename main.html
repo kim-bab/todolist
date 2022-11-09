@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="default.css">
+  <link rel="stylesheet" href="mainstyle.css">
+  <title>TODO List</title>
+</head>
+
+<body>
+  <!-- fed1c0 -->
+  <div class="login-form">
+    <div class="login-inner-container">
+      <p class="headline-text">HELLO :) What's your name?</p>
+      <form class="todo-form">
+        <input id="login-input" type="text" autocomplete="off">
+        <button class="login-submit" type="submit"></button>
+      </form>
+      <p class="alert-text"></p>
+    </div>
+  </div>
+
+
+  <div class="task_add_modal hidden">
+    <div class="inner_task_modal">
+      <nav id="title_task_modal">
+        <span>add task</span>
+        <span class="task_xbtn"></span>
+      </nav>
+
+      <div class="inner_input_box">
+        <div class="input_box">
+          <input type="text" id="text" autocomplete="off">
+          <p class="input_maxlength">
+            <span class="input_length">0</span> / 50
+          </p>
+          <button type="button" id="xbtn"></button>
+        </div>
+        <button type="button" class="task_btn">add</button>
+      </div>
+    </div>
+    <div class="task_modal_bg"></div>
+  </div>
+
+
+  <div class="task_edit_modal hidden">
+    <div class="edit_inner_task_modal">
+      <nav id="edit_title_task_modal">
+        <span>edit task</span>
+        <span class="edit_task_xbtn"></span>
+      </nav>
+
+      <div class="edit_inner_input_box">
+        <div class="edit_input_box">
+          <input type="text" id="edit_text" autocomplete="off">
+          <p class="edit_input_maxlength">
+            <span class="edit_input_length">0</span> / 50
+          </p>
+          <button type="button" id="edit_xbtn"></button>
+        </div>
+        <button type="button" class="edit_task_btn">edit</button>
+      </div>
+    </div>
+    <div class="edit_task_modal_bg"></div>
+  </div>
+
+
+  
+  <div class="container hidden">
+
+    <main class="bottom-todolist-box">
+
+      <nav class="user_info">
+        <p>반가워요 <span class="user-id"></span>님!😊 </p>
+        <button type="button" class="logout">logout</button>
+      </nav>
+
+      <section class="calendar">
+        <span class="day"></span>
+        <span class="date"></span>
+      </section>
+
+      <section class="add_list">
+        <span class="ing"><span class="ing_task">4</span></span>
+        <span class="add_new"><button type="button" id="btn"></button></span>
+        <button type="button" id="total-delete"></button>
+      </section>
+      <section class="top-filter-box">
+        <div class="tabs">
+          <button type="button" id="all" class="tab choose"></button>
+          <button type="button" id="done" class="tab"></button>
+        </div>
+      </section>
+      </main>
+
+      <div class="test">
+        <div class="list-container">
+          <div class="list_box"></div>
+        </div>
+      </div>
+
+  </div>
+
+
+
+  <section class="delete-modal">
+    <div class="delete-bg">
+
+      <div class="modal-box">
+        <nav class="top-delete-close">
+          <p class="delete-close"></p>
+        </nav>
+        <div class="flex-modal-box">
+          <div class="text-delete">
+            <p class="modal_icon"></p>
+            <h1>리스트가 모두 사라집니다. 삭제하시겠습니까?</h1>
+          </div>
+
+          <div class="yesorno">
+            <button type="button" id="yes-btn" class="modalbtn">확인</button>
+            <button type="button" id="no-btn" class="modalbtn">취소</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="logout-delete-modal">
+    <div class="logout-delete-bg">
+
+      <div class="logout-modal-box">
+        <nav class="logout-top-delete-close">
+          <p class="">logout</p>
+          <p class="logout-delete-close"></p>
+        </nav>
+        <div class="logout-flex-modal-box">
+          <div class="logout-text-delete">
+            <p class="logout-modal_icon"></p>
+            <h1>데이터가 모두 사라집니다. 삭제하시겠습니까?</h1>
+          </div>
+
+          <div class="logout-yesorno">
+            <button type="button" id="logout-yes-btn" class="logout-modalbtn">확인</button>
+            <button type="button" id="logout-no-btn" class="logout-modalbtn">취소</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="https://kit.fontawesome.com/5b11df227d.js" crossorigin="anonymous"></script>
+  <script src="login.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
