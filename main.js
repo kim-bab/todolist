@@ -181,7 +181,7 @@ function render(id) {
       result += `<div class="list">
         <button class="list-btns" id="finish" onclick="checkList('${items.id}')"><i class="fa-solid fa-square-check"></i></button>
         <p id="items" class="end-list">${items.context}</p>
-        <div class="checkBtns">
+        <div class="checkBtns hidden">
           <button id="delete" class="list-btns" onclick="deleteList('${items.id}')"></button>
           <button class="up" onclick="upBtn('${items.id}')"></button>
           </div>
@@ -191,7 +191,7 @@ function render(id) {
       result += `<div class="list">
         <button id="check" class="list-btns" onclick="checkList('${items.id}')"><i class="fa-regular fa-square"></i></button>
           <p id="items">${items.context}</p>
-          <div class="checkBtns">
+          <div class="checkBtns hidden">
             <button id="delete" class="list-btns" onclick="deleteList('${items.id}')"></button>
             <button class="up" onclick="upBtn('${items.id}')"></button>
           </div>
@@ -217,6 +217,22 @@ document.querySelector(".list_box").innerHTML = result; //ui에 보여주자
   })
 
   document.querySelector('.ing_task').textContent =  `${tasks.length} / ${arr.length}`;
+
+
+
+  //리스트 호버, 클릭 시 박스 선 나타냄
+const listEventShow = document.querySelectorAll('.list');
+
+listEventShow.forEach((items) => {
+
+  items.addEventListener('mouseover', () => {
+      items.style.borderBottom = '1px solid #4a50fa2f';
+    })
+
+  items.addEventListener('mouseleave', () => {
+      items.style.borderBottom = '1px solid rgba(255, 0, 0, 0)';
+    })
+})
 }
 
 render();
@@ -229,13 +245,6 @@ tabs.forEach((onTabs) => {
   });
 });
 
-
-// window.addEventListener('resize', () => {
-//   const absoluteTop = container.getBoundingClientRect();
-//   console.log(absoluteTop);
-//   const bodyHeight = document.body.getBoundingClientRect().height;
-//   container.style.height = `${bodyHeight - absoluteTop.top - 70}px`;
-// })
 
 
 //편집..
@@ -349,13 +358,12 @@ function checkList(id) {
 
   arr.forEach((items) => {
     if (id == items.id) { //랜덤아이디와 내가 클릭한 아이디가 같다면
-      items.isComplete = !items.isComplete; //체크,안체크 스위치
-    }
+        items.isComplete = !items.isComplete; //체크,안체크 스위치
+      }
   })
-
   localCheck();
   filter();
-  
+
 }
 
 

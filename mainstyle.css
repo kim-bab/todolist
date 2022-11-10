@@ -125,7 +125,8 @@ form{
   transition: all .2s;
   position: absolute;
   width: 450px;
-  height: calc(100% - 70px);
+  height: calc(100% - 130px);
+  max-height: 500px;
   overflow-y: scroll;
   box-shadow: #93b3d7b7 0px 10px 25px -3px, #3954749a 0px 4px 10px -2px;
   /* overflow: hidden; */
@@ -141,7 +142,7 @@ form{
 @media screen and (max-width: 500px){
   .container {
     width: calc(100% - 10%);
-    height: calc(100% - 30px);
+    height: calc(100% - 100px);
   }
 }
 
@@ -161,6 +162,7 @@ form{
 .top-filter-box{
   text-align: center;
   width: 100%;
+  font-size: 0;
 }
 .tabs{
   display: flex;
@@ -205,7 +207,7 @@ form{
 }
 
 
-.test{
+.list_overflow{
   width: 100%;
 }
 
@@ -237,16 +239,28 @@ form{
   border-bottom: 1px solid #ffffff2f;
 }
 
+.action{
+  animation: listAction .8s;
+}
+
+@keyframes listAction {
+  0%{
+    transform: translateX(0px);
+  }
+  50%{
+    transform: translateX(30px);
+  }
+  100%{
+    transform: translateX(-100px);
+  }
+}
+
 #items{
   line-height: 20px;
-  width: calc(100% - 100px);
+  width: calc(100% - 130px);
   word-break: break-all;
 }
 
-
-.list:hover{
-  border-bottom: 1px solid #4a50fa2f;
-}
 
 .list-btns{
   font-weight: bold;
@@ -255,11 +269,9 @@ form{
 
 .checkBtns{
   transition: all .3s;
-  opacity: 0;
-  visibility: hidden;
 }
 
-.list:hover .checkBtns{
+.list:active .checkBtns, .list:hover .checkBtns{
   opacity: 1;
   visibility: visible;
 }
@@ -485,7 +497,7 @@ form{
   cursor: pointer;
   width: 30px;
   height: 30px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border-radius: 50%;
   transition: all .3s;
   background-color:var(--main-color);

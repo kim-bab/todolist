@@ -73,8 +73,7 @@ logoutDeleteModal.addEventListener('click', (e) => {
   //데이터 초기화
   userId.textContent = "";
   $logInput.value = "";
-  setTimeout(
-    function () {
+  setTimeout( function () {
       $logInput.focus();
     }, 50);
     
@@ -88,8 +87,7 @@ function init() {
 
   $logInput.style.width = '100%';
   
-  setTimeout(
-    function () {
+  setTimeout( function () {
       $logInput.focus();
     }, 50);
 
