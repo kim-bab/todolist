@@ -183,7 +183,6 @@ function render(id) {
         <p id="items" class="end-list">${items.context}</p>
         <div class="checkBtns hidden">
           <button id="delete" class="list-btns" onclick="deleteList('${items.id}')"></button>
-          <button class="up" onclick="upBtn('${items.id}')"></button>
           </div>
         </div>`;
     }

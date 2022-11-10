@@ -165,6 +165,7 @@ form{
   font-size: 0;
 }
 .tabs{
+  font-size: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
