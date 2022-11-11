@@ -11,7 +11,6 @@
 </head>
 
 <body>
-  <!-- fed1c0 -->
   <div class="login-form">
     <div class="login-inner-container">
       <p class="headline-text">HELLO :) What's your name?</p>
@@ -19,53 +18,34 @@
         <input id="login-input" type="text" autocomplete="off">
         <button class="login-submit" type="submit"></button>
       </form>
-      <p class="alert-text"></p>
     </div>
   </div>
 
 
-  <div class="task_add_modal hidden">
+<div class="task_add_modal hidden">
+  <div class="task_modal_bg">
+
     <div class="inner_task_modal">
       <nav id="title_task_modal">
         <span>add task</span>
         <span class="task_xbtn"></span>
       </nav>
-
+      
       <div class="inner_input_box">
         <div class="input_box">
-          <input type="text" id="text" autocomplete="off">
+            <input type="text" id="text" autocomplete="off">
+            <button type="button" id="xbtn"></button>
           <p class="input_maxlength">
             <span class="input_length">0</span> / 50
           </p>
-          <button type="button" id="xbtn"></button>
         </div>
         <button type="button" class="task_btn">add</button>
       </div>
-    </div>
-    <div class="task_modal_bg"></div>
-  </div>
-
-
-  <div class="task_edit_modal hidden">
-    <div class="edit_inner_task_modal">
-      <nav id="edit_title_task_modal">
-        <span>edit task</span>
-        <span class="edit_task_xbtn"></span>
-      </nav>
-
-      <div class="edit_inner_input_box">
-        <div class="edit_input_box">
-          <input type="text" id="edit_text" autocomplete="off">
-          <p class="edit_input_maxlength">
-            <span class="edit_input_length">0</span> / 50
-          </p>
-          <button type="button" id="edit_xbtn"></button>
-        </div>
-        <button type="button" class="edit_task_btn">edit</button>
       </div>
-    </div>
-    <div class="edit_task_modal_bg"></div>
+
   </div>
+</div>
+
 
 
   
@@ -106,7 +86,7 @@
 
 
 
-  <section class="delete-modal">
+  <section class="delete-modal hidden">
     <div class="delete-bg">
 
       <div class="modal-box">
@@ -130,7 +110,7 @@
   </section>
 
 
-  <section class="logout-delete-modal">
+  <section class="logout-delete-modal hidden">
     <div class="logout-delete-bg">
 
       <div class="logout-modal-box">

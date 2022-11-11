@@ -23,11 +23,6 @@ const addTaskModalBtn = document.querySelector('#btn');
 let inputLength = document.querySelector('.input_length');
 
 
-//편집기능
-const taskEditModal = document.querySelector('.task_edit_modal');
-const editText = document.querySelector('#edit_text');
-const editTaskBtn = document.querySelector('.edit_task_btn');
-
 
 //전체삭제 모달 변수
 const modal = document.querySelector('.delete-modal');
@@ -216,26 +211,9 @@ document.querySelector(".list_box").innerHTML = result; //ui에 보여주자
   })
 
   document.querySelector('.ing_task').textContent =  `${tasks.length} / ${arr.length}`;
-
-
-
-  //리스트 호버, 클릭 시 박스 선 나타냄
-const listEventShow = document.querySelectorAll('.list');
-
-listEventShow.forEach((items) => {
-
-  items.addEventListener('mouseover', () => {
-      items.style.borderBottom = '1px solid #4a50fa2f';
-    })
-
-  items.addEventListener('mouseleave', () => {
-      items.style.borderBottom = '1px solid rgba(255, 0, 0, 0)';
-    })
-})
 }
 
 render();
-
 
 
 tabs.forEach((onTabs) => {
@@ -243,38 +221,6 @@ tabs.forEach((onTabs) => {
     filter(event);
   });
 });
-
-
-
-//편집..
-// function editList(id){
-//   arr.forEach((items) => {
-//     if(items.id === id){
-//       editText.value = items.context;
-//       taskEditModal.classList.remove('hidden');
-//       console.log(editText.value);
-//       editTaskBtn.addEventListener('click', editBtn);
-//     }
-//   })
-// }
-
-// function editBtn(event) {
-//   event.stopPropagation();
-//   let test = JSON.parse(localStorage.getItem('list'));
-//   let obj = items.context = editText.value;
-//   localStorage.setItem('list', JSON.stringify(obj));
-//   taskEditModal.classList.add('hidden');
-//   console.log(JSON.parse(localStorage.getItem('list')));
-// }
-
-
-// taskEditModal.addEventListener('click', (e) => {
-//   let targetId = e.target;
-
-//   if(targetId.className === 'edit_task_modal_bg' || targetId.className === 'edit_task_xbtn'){
-//     taskEditModal.classList.add('hidden');
-//   }
-// });
 
 
 //추가버튼 클릭시
@@ -308,6 +254,8 @@ inputDelete.addEventListener('click', function(e) {
   e.preventDefault();
   e.stopPropagation();
   inputText.value = '';
+  inputLength.textContent = 0;
+  inputText.focus();
 });
 
 
@@ -320,9 +268,11 @@ totalDelete.addEventListener('click', function() {
 //전체삭제 확인여부 모달창
 modal.addEventListener('click', (e) => {
   console.log(e.target);
+  modal.classList.remove('hidden');
   modal.classList.add('show');
   if(e.target.className === 'delete-bg' || e.target.id === 'no-btn' || e.target.className === 'delete-close'){
     modal.classList.remove('show');
+    modal.classList.add('hidden');
   }
 
   if(e.target.id === 'yes-btn'){

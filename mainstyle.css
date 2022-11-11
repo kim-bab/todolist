@@ -13,13 +13,12 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #eaf2fb;
-  transition: all .3s ease-in-out;
   font-family: 'Titillium Web', 'NanumSquareRound', sans-serif;
 }
 
 
-.login-form{
-  transition: all .6s;
+.login-form, .checkBtns{
+  transition: all .3s;
 }
 .login-inner-container {
   background-color: #ffffff;
@@ -35,7 +34,7 @@ body {
 
 form{
   display: flex;
-  width: 350px;
+  width: 330px;
   padding: 30px;
   flex-direction: row;
   justify-content: center;
@@ -58,6 +57,8 @@ form{
   cursor: pointer;
   width: 40px;
   height: 40px;
+  display: grid;
+  place-items: center;
   border: 1px solid var(--main-color);
   background-color: var(--main-color);
   color: white;
@@ -68,9 +69,6 @@ form{
   font-weight: 900;
   font-family: FontAwesome;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   color: white;
   font-size: 0.9rem;
   
@@ -94,10 +92,6 @@ form{
   to {
     transform: rotate(-3deg);
   }
-}
-
-.alert-text{
-  text-align: center;
 }
 
 .user_info{
@@ -171,6 +165,7 @@ form{
   align-items: center;
 }
 .tab{
+  background-color: #eaeaea;
   cursor: pointer;
   width: 100%;
   padding: 30px;
@@ -180,31 +175,29 @@ form{
 }
 .choose{
   transition: all .3s;
-  background: #ffffff;
+  background-color: #ffffff;
   font-weight: bold;
   border-bottom: 1px solid #ffffff;
 }
 
 #all, #done{
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
 }
 #all::after{
   content: "\f03a";
   font-weight: 100;
   font-family: FontAwesome;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
 }
 #done::after{
   content: "\f00c";
   font-weight: 100;
   font-family: FontAwesome;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
 }
 
 
@@ -215,13 +208,8 @@ form{
 .list-container{
   width: 100%;
   height: 100%;
-  /* overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none; */
 }
-/* .list-container::-webkit-scrollbar{
-  display: none; 
-} */
+
 .list_box {
   margin-top: 0px;
   width: 100%;
@@ -240,75 +228,49 @@ form{
   border-bottom: 1px solid #ffffff2f;
 }
 
-.action{
-  animation: listAction .8s;
-}
-
-@keyframes listAction {
-  0%{
-    transform: translateX(0px);
-  }
-  50%{
-    transform: translateX(30px);
-  }
-  100%{
-    transform: translateX(-100px);
-  }
-}
-
 #items{
   line-height: 20px;
   width: calc(100% - 130px);
   word-break: break-all;
 }
 
-
 .list-btns{
   font-weight: bold;
   cursor: pointer;
-}
-
-.checkBtns{
-  transition: all .3s;
 }
 
 .list:active .checkBtns, .list:hover .checkBtns{
   opacity: 1;
   visibility: visible;
 }
-
-.done_action{
-  transform: translateX(-100vw);
-  transition: all .3s;
+.list:active, .list:hover{
+  cursor: pointer;
+  border-bottom: 1px solid #4a50fa2f;
 }
-
 
 .checkBtns button{
   cursor: pointer;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
-#edit{
-  color: #565e81;
-  background-color: #e4e7f8;
-}
-#delete{
   position: relative;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  float: left;
+}
+
+#delete{
   color: #fd2a38;
   background-color: #ffe8e8;
+  margin-right: 5px;
 }
 #delete::after{
   content: "\f00d";
   font-weight: 100;
   font-family: FontAwesome;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
 }
-.down,.up {
-  position: relative;
+.up {
   background-color: #edf2fd;
   color: #6692e1;
 }
@@ -317,11 +279,7 @@ form{
   font-weight: 100;
   font-family: FontAwesome;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
 }
-
 
 #check{
   font-size: 1.1rem;
@@ -335,11 +293,10 @@ form{
   background-color: rgba(255, 255, 255, 0);
   color: var(--tonedown-color);
 }
-
 .end-list {
+  color:rgb(192, 192, 192);
   text-decoration: line-through;
 }
-
 
 .add_list{
   background-color: white;
@@ -360,95 +317,86 @@ form{
 }
 
 
-
-.task_add_modal,.task_edit_modal{
+/* =======모달창 공통 코드======= */
+.task_add_modal, .delete-modal, .logout-delete-modal{
   transition: all .3s;
-  position: absolute;
-  z-index: 9;
-  top: 0;
-  left: 0;
+  position: fixed;
+  z-index: 99;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.inner_task_modal, .edit_inner_task_modal{
-  box-shadow: rgba(100, 100, 111, 0.8) 0px 7px 29px 0px;
-  position: absolute;
+.delete-bg, .logout-delete-bg,.task_modal_bg{
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 9;
+  position: absolute;
+  background-color:  rgba(21, 21, 21, 0.6);
+}
+/* ============================ */
+
+.inner_task_modal{
+  box-shadow: rgba(80, 80, 87, 0.8) 0px 7px 29px 0px;
   background-color: var(--main-color);
 }
-#title_task_modal, #edit_title_task_modal{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+#title_task_modal{
   position: relative;
   color: var(--tonedown-color);
-  font-size: 0.9rem;
   width: 100%;
+  text-align: center;
   padding: 10px;
   text-transform: uppercase;
   font-weight: 900;
   background-color: white;
 }
 
-.task_xbtn, .edit_task_xbtn{
+.task_xbtn{
   cursor: pointer;
   position: absolute;
   top: 4px;
   right: 4px;
 }
-.task_xbtn::after, .edit_task_xbtn::after{
+.task_xbtn::after{
   content: "\58";
   top: 0px;
   right: 0px;
   padding: 5px 7px;
   border: 1px solid var(--tonedown-color);
   color: var(--tonedown-color);
-  font-size: 0.9rem;
   font-weight: 900;
   font-family: FontAwesome;
   position: absolute;
 }
-.inner_input_box, .edit_inner_input_box{
-  margin: 30px;
+
+.inner_input_box{
+  margin: 27px;
   gap: 15px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
 }
-.input_box, .edit_input_box{
+.input_box{
+  position: relative;
   width: 95%;
-  position: relative;
 }
-#text, #edit_text {
-  position: relative;
-  box-sizing: border-box;
+
+#text{
   padding: 10px 5px;
-  padding-right: 30px;
-  background: none;
+  padding-right: 27px;
   background-color: white;
-  box-shadow: 3px 3px 3px #282db8 inset;
-  color: #242424;
-  width: 100%;
+  color: rgb(27, 28, 33);
   font-size: 1rem;
 }
-#xbtn, #edit_xbtn{
+#xbtn{
   background: none;
   font-size: 1rem;
   position: absolute;
-  right: 0;
-  top: 4px;
-  width: 30px;
-  height: 30px;
+  right: 14px;
+  line-height: 37px;
   cursor: pointer;
   color: var(--tonedown-color);
 }
@@ -457,23 +405,20 @@ form{
   font-weight: 300;
   font-family: FontAwesome;
   position: absolute;
-  transform: translate(-50%,-50%);
-  left: 50%;
-  top: 50%;
 }
-.input_maxlength, .edit_input_maxlength{
+.input_maxlength{
   margin-top: 8px;
   color:rgb(192, 192, 192);
   width: 100%;
+  font-size: 13px;
   text-align: right;
 }
 
 
-.task_btn, .edit_task_btn{
-  top: 0;
+.task_btn{
   cursor: pointer;
   text-transform: uppercase;
-  padding: 11px;
+  padding: 11.5px;
   background-color: var(--tonedown-color);
   color: white;
 }
@@ -483,88 +428,50 @@ form{
   color: #ffffff;
 }
 
-.task_modal_bg, .edit_task_modal_bg{
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color:  rgba(21, 21, 21, 0.6);
-}
-
-
-
 #btn{
-  position: relative;
   cursor: pointer;
+  position: relative;
   width: 30px;
   height: 30px;
-  font-size: 1rem;
+  display: grid;
+  place-items: center;
   border-radius: 50%;
   transition: all .3s;
   background-color:var(--main-color);
-  color: #ffffff;
 }
 #btn::after{
   content: "\2b";
   font-weight: 300;
   font-family: FontAwesome;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  color: #ffffff;
 }
 #btn:hover{
   transform: rotate(180deg);
 }
 
 
-
 #total-delete{
   position: relative;
   cursor: pointer;
+  display: grid;
+  place-items: center;
   width: 30px;
   height: 30px;
-  font-size: 1rem;
   border-radius: 50%;
   background-color:var(--main-color);
-  color:#ffffff;
 }
 #total-delete::after{
   content: "\f1f8";
   font-weight: 100;
   font-family: FontAwesome;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  color:#ffffff;
 }
 
 
 /*전체삭제 버튼 모달창*/
-.delete-modal, .logout-delete-modal{
-  z-index: 999;
-  transition: all .3s ease-in-out;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-}
-
-.delete-bg, .logout-delete-bg{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  background-color:  rgba(21, 21, 21, 0.6);
-}
-
 .modal-box, .logout-modal-box{
-  /* width: 320px; */
   background-color: var(--main-color);
   box-shadow: rgba(100, 100, 111, 0.8) 0px 7px 29px 0px;
   position: absolute;
@@ -613,34 +520,33 @@ form{
   text-align: center;
   width: 40px;
   height: 40px;
+  display: grid;
+  place-items: center;
   margin: 0 auto;
   border-radius: 50%;
   background-color: #282db8;
 }
+.modal_icon::after{
+  content: "\21";
+  font-weight: 900;
+  font-family: FontAwesome;
+  position: absolute;
+  color: white;
+}
+
 .logout-modal_icon{
   position: relative;
   padding: 20px;
-}
-.modal_icon::after{
-  content: "\21";
-  color: white;
-  font-weight: 900;
-  font-family: FontAwesome;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  display: grid;
+  place-items: center;
 }
 .logout-modal_icon::after{
   content: "\f071";
-  color: white;
   font-weight: 900;
   font-family: FontAwesome;
   position: absolute;
+  color: white;
   font-size: 2.2rem;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
 }
 
 
@@ -657,8 +563,6 @@ form{
   background-color: white;
   box-shadow: #282db8 0px 2px 5px 0px;
 }
-
-
 
 
 .hidden{

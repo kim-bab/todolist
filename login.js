@@ -1,6 +1,6 @@
 const loginForm = document.querySelector('.login-form');
 const $form = document.querySelector('.todo-form');
-const test = document.querySelector('.login-submit');
+const loginSubmit = document.querySelector('.login-submit');
 const hiddenLogin = document.querySelector('.container');
 const userId = document.querySelector('.user-id');
 const $logInput = document.querySelector('#login-input');
@@ -24,9 +24,9 @@ $form.addEventListener('submit', (event) => {
   currentName = nameValue; //input값을 localStorage에 넣자
 
   if (currentName === null || $logInput.value === "" || currentName.length > 6) { // localStorage에 key값이 비어있거나 입력값의 길이가 6이 넘었을 때
-    test.classList.add('effect');
+    loginSubmit.classList.add('effect');
     setTimeout(()=>{
-      test.classList.remove('effect');
+      loginSubmit.classList.remove('effect');
     }, 500)
     return //실행취소
   }
