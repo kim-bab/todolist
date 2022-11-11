@@ -6,7 +6,7 @@
 body {
   overflow: hidden;
   position: relative;
-  color: black;
+  color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,42 +16,50 @@ body {
   font-family: 'Titillium Web', 'NanumSquareRound', sans-serif;
 }
 
+/* ========== 가상요소 공통 코드 ========== */
+.login-submit::after,#done::after, #all::after, #total-delete::after, .add-btn::after, .up::after, #delete::after, .modal_icon::after, .logout-modal_icon::after, .task_xbtn::after, .delete-close::after, .logout-delete-close::after {
+  font-weight: 100;
+  font-family: FontAwesome;
+  position: absolute;
+}
 
 .login-form, .checkBtns{
   transition: all .3s;
 }
+
 .login-inner-container {
-  background-color: #ffffff;
+  background-color: #fff;
   box-shadow: #b4cdeb87 0px 10px 20px -3px, #5473985f 0px 4px 10px -2px;
 }
+
 .headline-text{
   width: 100%;
-  color: white;
+  color: #fff;
   background-color: var(--main-color);
   text-align: center;
   padding: 10px;
 }
 
 form{
-  display: flex;
   width: 330px;
-  padding: 30px;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  padding: 30px;
 }
-
 
 #login-input{
   width: 0;
   font-size: 17px;
   box-shadow:#8da1cc 2px 2px 4px 1px inset;
   background-color:#b6c7ee;
-  color: black;
-  padding: 10px;
+  color: #000;
   transition: all .3s;
+  padding: 10px;
 }
+
 .login-submit{
   position: relative;
   cursor: pointer;
@@ -61,18 +69,16 @@ form{
   place-items: center;
   border: 1px solid var(--main-color);
   background-color: var(--main-color);
-  color: white;
+  color: #fff;
   transition: all .3s;
 }
+
 .login-submit::after{
   content: "\f061";
-  font-weight: 900;
-  font-family: FontAwesome;
-  position: absolute;
-  color: white;
+  color: #fff;
   font-size: 0.9rem;
-  
 }
+
 .login-submit:hover{
   border: 1px solid var(--main-color);
   background: none;
@@ -84,7 +90,6 @@ form{
 .effect{
   animation: effect .1s infinite;
 }
-
 @keyframes effect {
   from {
     transform: rotate(3deg);
@@ -98,24 +103,24 @@ form{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  color: white;
+  color: #fff;
   border: 1px solid var(--main-color);
   background-color: var(--main-color);
+  padding: 15px;
 }
 .user-id{
   font-weight: 900;
 }
 .logout{
   cursor: pointer;
-  padding: 5px 8px;
   font-weight: 600;
-  background-color: white;
+  background-color: #fff;
   color: var(--main-color);
+  padding: 5px 8px;
 }
 
 .container {
-  background-color: white;
+  background-color: #fff;
   transition: all .2s;
   position: absolute;
   width: 450px;
@@ -142,11 +147,11 @@ form{
 
 .calendar{
   text-align: center;
-  padding: 20px;
   letter-spacing: 3px;
   color: var(--tonedown-color);
-  background-color: white;
+  background-color: #fff;
   border-bottom: 1px solid #4a50fa2f;
+  padding: 20px;
 }
 .day{
   font-size: 1.2rem;
@@ -154,6 +159,7 @@ form{
 }
 
 .top-filter-box{
+  overflow: hidden;
   text-align: center;
   width: 100%;
   font-size: 0;
@@ -168,16 +174,16 @@ form{
   background-color: #eaeaea;
   cursor: pointer;
   width: 100%;
-  padding: 30px;
   color: var(--tonedown-color);
   transition: all .3s;
   border-bottom: 1px solid #4a50fa2f;
+  padding: 30px;
 }
 .choose{
   transition: all .3s;
-  background-color: #ffffff;
-  font-weight: bold;
-  border-bottom: 1px solid #ffffff;
+  background-color: #fff;
+  font-weight: 700;
+  border-bottom: 1px solid #fff;
 }
 
 #all, #done{
@@ -189,29 +195,12 @@ form{
 }
 #all::after{
   content: "\f03a";
-  font-weight: 100;
-  font-family: FontAwesome;
-  position: absolute;
 }
 #done::after{
   content: "\f00c";
-  font-weight: 100;
-  font-family: FontAwesome;
-  position: absolute;
-}
-
-
-.list_overflow{
-  width: 100%;
-}
-
-.list-container{
-  width: 100%;
-  height: 100%;
 }
 
 .list_box {
-  margin-top: 0px;
   width: 100%;
 }
 
@@ -239,6 +228,11 @@ form{
   cursor: pointer;
 }
 
+.checkBtns{
+  opacity: 0;
+  visibility: hidden;
+}
+
 .list:active .checkBtns, .list:hover .checkBtns{
   opacity: 1;
   visibility: visible;
@@ -246,6 +240,12 @@ form{
 .list:active, .list:hover{
   cursor: pointer;
   border-bottom: 1px solid #4a50fa2f;
+}
+@media screen and (max-width: 500px) {
+  .checkBtns{
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .checkBtns button{
@@ -266,30 +266,19 @@ form{
 }
 #delete::after{
   content: "\f00d";
-  font-weight: 100;
-  font-family: FontAwesome;
-  position: absolute;
 }
+
 .up {
   background-color: #edf2fd;
   color: #6692e1;
 }
 .up::after{
   content: "\f062";
-  font-weight: 100;
-  font-family: FontAwesome;
-  position: absolute;
 }
 
-#check{
+#check, #finish{
   font-size: 1.1rem;
-  font-weight: bold;
-  background-color: rgba(255, 255, 255, 0);
-  color: var(--tonedown-color);
-}
-#finish{
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 700;
   background-color: rgba(255, 255, 255, 0);
   color: var(--tonedown-color);
 }
@@ -299,23 +288,27 @@ form{
 }
 
 .add_list{
-  background-color: white;
-  width: 100%;
-  padding: 15px 0;
-  padding-right: 0;
+  background-color: #fff;
   border-bottom: 1px solid #4a50fa2f;
   color: var(--tonedown-color);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   letter-spacing: 2px;
 }
-
-.add_new{
-  font-weight: 900;
-  text-transform: uppercase;
+.add_list ul{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
 }
-
+.add_list li{
+  padding: 10px;
+  width: calc(100% / 3);
+}
+.add-btn, #total-delete{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 /* =======모달창 공통 코드======= */
 .task_add_modal, .delete-modal, .logout-delete-modal{
@@ -350,7 +343,7 @@ form{
   padding: 10px;
   text-transform: uppercase;
   font-weight: 900;
-  background-color: white;
+  background-color: #fff;
 }
 
 .task_xbtn{
@@ -363,21 +356,18 @@ form{
   content: "\58";
   top: 0px;
   right: 0px;
-  padding: 5px 7px;
   border: 1px solid var(--tonedown-color);
   color: var(--tonedown-color);
-  font-weight: 900;
-  font-family: FontAwesome;
-  position: absolute;
+  padding: 5px 7px;
 }
 
 .inner_input_box{
-  margin: 27px;
-  gap: 15px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+  gap: 15px;
+  margin: 27px;
 }
 .input_box{
   position: relative;
@@ -385,11 +375,11 @@ form{
 }
 
 #text{
-  padding: 10px 5px;
-  padding-right: 27px;
-  background-color: white;
+  background-color: #fff;
   color: rgb(27, 28, 33);
   font-size: 1rem;
+  padding: 10px 5px;
+  padding-right: 27px;
 }
 #xbtn{
   background: none;
@@ -402,7 +392,6 @@ form{
 }
 #xbtn::after{
   content: "\58";
-  font-weight: 300;
   font-family: FontAwesome;
   position: absolute;
 }
@@ -414,21 +403,20 @@ form{
   text-align: right;
 }
 
-
 .task_btn{
   cursor: pointer;
   text-transform: uppercase;
   padding: 11.5px;
   background-color: var(--tonedown-color);
-  color: white;
+  color: #fff;
 }
 .btn-disabled{
   cursor: no-drop;
   background:#a7a7a7;
-  color: #ffffff;
+  color: #fff;
 }
 
-#btn{
+.add-btn{
   cursor: pointer;
   position: relative;
   width: 30px;
@@ -436,20 +424,16 @@ form{
   display: grid;
   place-items: center;
   border-radius: 50%;
-  transition: all .3s;
   background-color:var(--main-color);
 }
-#btn::after{
+.add-btn::after{
   content: "\2b";
-  font-weight: 300;
-  font-family: FontAwesome;
-  position: absolute;
-  color: #ffffff;
+  transition: all .3s;
+  color: #fff;
 }
-#btn:hover{
+.add-btn:hover::after{
   transform: rotate(180deg);
 }
-
 
 #total-delete{
   position: relative;
@@ -463,12 +447,8 @@ form{
 }
 #total-delete::after{
   content: "\f1f8";
-  font-weight: 100;
-  font-family: FontAwesome;
-  position: absolute;
-  color:#ffffff;
+  color: #fff;
 }
-
 
 /*전체삭제 버튼 모달창*/
 .modal-box, .logout-modal-box{
@@ -479,7 +459,7 @@ form{
 }
 .top-delete-close{
   height: 30px;
-  background-color: white;
+  background-color: #fff;
 }
 .logout-top-delete-close{
   display: flex;
@@ -489,9 +469,9 @@ form{
   color: var(--tonedown-color);
   text-transform: uppercase;
   font-weight: 900;
-  font-size: 0.9rem;
+  font-size: .9rem;
   height: 30px;
-  background-color: white;
+  background-color: #fff;
 }
 .delete-close::after, .logout-delete-close::after{
   cursor: pointer;
@@ -501,18 +481,15 @@ form{
   padding: 5px 7px;
   border: 1px solid var(--tonedown-color);
   color: var(--tonedown-color);
-  font-size: 0.9rem;
-  font-weight: 900;
-  font-family: FontAwesome;
-  position: absolute;
+  font-size: .9rem;
 }
 
 .flex-modal-box, .logout-flex-modal-box{
-  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px 0;
 }
 
 .modal_icon{
@@ -526,12 +503,10 @@ form{
   border-radius: 50%;
   background-color: #282db8;
 }
+
 .modal_icon::after{
   content: "\21";
-  font-weight: 900;
-  font-family: FontAwesome;
-  position: absolute;
-  color: white;
+  color: #fff;
 }
 
 .logout-modal_icon{
@@ -542,16 +517,12 @@ form{
 }
 .logout-modal_icon::after{
   content: "\f071";
-  font-weight: 900;
-  font-family: FontAwesome;
-  position: absolute;
-  color: white;
   font-size: 2.2rem;
+  color: #fff;
 }
 
-
 .modal-box h1, .logout-modal-box h1{
-  color: white;
+  color: #fff;
   word-break: keep-all;
   margin: 20px;
 }
@@ -560,10 +531,9 @@ form{
   color: var(--tonedown-color);
   padding: 10px 20px;
   font-weight: bold;
-  background-color: white;
+  background-color: #fff;
   box-shadow: #282db8 0px 2px 5px 0px;
 }
-
 
 .hidden{
   opacity: 0;

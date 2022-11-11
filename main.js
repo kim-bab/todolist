@@ -19,7 +19,7 @@ const tabs = document.querySelectorAll('.tab');
 const all = document.querySelector('#all');
 const done = document.querySelector('#done');
 const taskAddModal = document.querySelector('.task_add_modal');
-const addTaskModalBtn = document.querySelector('#btn');
+const addTaskModalBtn = document.querySelector('.add-btn');
 let inputLength = document.querySelector('.input_length');
 
 
@@ -51,12 +51,9 @@ inputText.addEventListener('click', inputEnterBox);
 
 function init(){
   calrendarRender(); //달력
-
 }
 
 init();
-
-
 
 
 //달력
@@ -64,7 +61,6 @@ function calrendarRender(){
   days.textContent = `${weeks[day]}`;
   dates.textContent = `${date < 10 ? '0'+date : date}`;
 }
-
 
 
 //할일 추가 이벤트리스너
@@ -176,7 +172,7 @@ function render(id) {
       result += `<div class="list">
         <button class="list-btns" id="finish" onclick="checkList('${items.id}')"><i class="fa-solid fa-square-check"></i></button>
         <p id="items" class="end-list">${items.context}</p>
-        <div class="checkBtns hidden">
+        <div class="checkBtns">
           <button id="delete" class="list-btns" onclick="deleteList('${items.id}')"></button>
           </div>
         </div>`;
@@ -185,7 +181,7 @@ function render(id) {
       result += `<div class="list">
         <button id="check" class="list-btns" onclick="checkList('${items.id}')"><i class="fa-regular fa-square"></i></button>
           <p id="items">${items.context}</p>
-          <div class="checkBtns hidden">
+          <div class="checkBtns">
             <button id="delete" class="list-btns" onclick="deleteList('${items.id}')"></button>
             <button class="up" onclick="upBtn('${items.id}')"></button>
           </div>
@@ -197,11 +193,15 @@ document.querySelector(".list_box").innerHTML = result; //ui에 보여주자
 
   
 
-  if (arr.length > 15) { //arr길이가 7이 넘는다면
+  if (arr.length > 15) { //arr길이가 15이 넘는다면
+    addTaskModalBtn.disabled = true;
+    addTaskModalBtn.style.backgroundColor = '#a7a7a7';
     addBtn.removeEventListener('click', addBtnBox); //리스트 추가 이벤트를 삭제하자
     inputText.removeEventListener('keyup', inputEnterBox);
   }
   else {
+    addTaskModalBtn.disabled = false;
+    addTaskModalBtn.style.backgroundColor = '#3338f7';
     addBtn.addEventListener('click', addBtnBox); //리스트를 계속 추가하자
     inputText.addEventListener('keyup', inputEnterBox);
   }
@@ -253,6 +253,8 @@ taskAddModal.addEventListener('click', (e) => {
 inputDelete.addEventListener('click', function(e) {
   e.preventDefault();
   e.stopPropagation();
+  addBtn.classList.remove('btn-disabled');
+  addBtn.disabled = false;
   inputText.value = '';
   inputLength.textContent = 0;
   inputText.focus();
@@ -267,7 +269,6 @@ totalDelete.addEventListener('click', function() {
 
 //전체삭제 확인여부 모달창
 modal.addEventListener('click', (e) => {
-  console.log(e.target);
   modal.classList.remove('hidden');
   modal.classList.add('show');
   if(e.target.className === 'delete-bg' || e.target.id === 'no-btn' || e.target.className === 'delete-close'){
@@ -399,10 +400,6 @@ function filter(event) {
     render();
   }
 }
-
-
-
-
 
 
 //랜덤 아이디 생성 함수

@@ -49,7 +49,6 @@ function logOutBox() {
 }
 
 logoutDeleteModal.addEventListener('click', (e) => {
-  console.log(e.target);
   logoutDeleteModal.classList.add('show');
   if(e.target.className === 'logout-delete-bg' || e.target.id === 'logout-no-btn' || e.target.className === 'logout-delete-close'){
     logoutDeleteModal.classList.remove('show');

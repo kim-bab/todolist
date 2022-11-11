@@ -21,70 +21,55 @@
     </div>
   </div>
 
-
-<div class="task_add_modal hidden">
-  <div class="task_modal_bg">
-
-    <div class="inner_task_modal">
-      <nav id="title_task_modal">
-        <span>add task</span>
-        <span class="task_xbtn"></span>
-      </nav>
-      
-      <div class="inner_input_box">
-        <div class="input_box">
+  <div class="task_add_modal hidden">
+    <div class="task_modal_bg">
+      <div class="inner_task_modal">
+        <nav id="title_task_modal">
+          <span>add task</span>
+          <span class="task_xbtn"></span>
+        </nav>
+        <div class="inner_input_box">
+          <div class="input_box">
             <input type="text" id="text" autocomplete="off">
             <button type="button" id="xbtn"></button>
-          <p class="input_maxlength">
-            <span class="input_length">0</span> / 50
-          </p>
+            <p class="input_maxlength">
+              <span class="input_length">0</span> / 50
+            </p>
+          </div>
+          <button type="button" class="task_btn">add</button>
         </div>
-        <button type="button" class="task_btn">add</button>
       </div>
-      </div>
-
+    </div>
   </div>
-</div>
 
-
-
-  
   <div class="container hidden">
-
     <main class="bottom-todolist-box">
-
       <nav class="user_info">
         <p>반가워요 <span class="user-id"></span>님!😊 </p>
         <button type="button" class="logout">logout</button>
       </nav>
-
       <section class="calendar">
         <span class="day"></span>
         <span class="date"></span>
       </section>
-
-      <section class="add_list">
-        <span class="ing"><span class="ing_task">4</span></span>
-        <span class="add_new"><button type="button" id="btn"></button></span>
-        <button type="button" id="total-delete"></button>
-      </section>
+      <div class="add_list">
+        <ul>
+          <li><span class="ing_task"></span></li>
+          <li><button type="button" class="add-btn"></button></li>
+          <li><button type="button" id="total-delete"></button></li>
+        </ul>
+      </div>
       <section class="top-filter-box">
         <div class="tabs">
           <button type="button" id="all" class="tab choose"></button>
           <button type="button" id="done" class="tab"></button>
         </div>
       </section>
-      </main>
-
-      <div class="list_overflow">
-        <div class="list-container">
-          <div class="list_box"></div>
-        </div>
+    </main>
+      <div class="list-container">
+        <div class="list_box"></div>
       </div>
-
   </div>
-
-
 
   <section class="delete-modal hidden">
     <div class="delete-bg">
@@ -109,10 +94,8 @@
     </div>
   </section>
 
-
   <section class="logout-delete-modal hidden">
     <div class="logout-delete-bg">
-
       <div class="logout-modal-box">
         <nav class="logout-top-delete-close">
           <p class="">logout</p>
@@ -130,7 +113,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
