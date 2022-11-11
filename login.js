@@ -12,7 +12,7 @@ function onlyText() {
   this.value = this.value.replace(pattern, '');
 }
 
-let currentName
+let currentName;
 
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -25,21 +25,20 @@ $form.addEventListener('submit', (event) => {
 
   if (currentName === null || $logInput.value === "" || currentName.length > 6) { // localStorage에 key값이 비어있거나 입력값의 길이가 6이 넘었을 때
     loginSubmit.classList.add('effect');
-    setTimeout(()=>{
+    setTimeout(() => {
       loginSubmit.classList.remove('effect');
     }, 500)
-    return //실행취소
+    return
   }
   else if (currentName !== null) { // localStorage에 key값이 이미 들어있다면
     loginForm.classList.add('hidden');
-    $form.classList.add('hidden'); 
+    $form.classList.add('hidden');
     hiddenLogin.classList.remove('hidden'); //ui에 안보이게 처리하고
     userId.textContent = currentName; //input에 입력한 값을 ui에 뿌려주자
   }
 
   localStorage.setItem('name', JSON.stringify(nameValue));
   //localStorage에 데이터를 저장하자
-
 })
 
 
@@ -50,49 +49,44 @@ function logOutBox() {
 
 logoutDeleteModal.addEventListener('click', (e) => {
   logoutDeleteModal.classList.add('show');
-  if(e.target.className === 'logout-delete-bg' || e.target.id === 'logout-no-btn' || e.target.className === 'logout-delete-close'){
+  if (e.target.className === 'logout-delete-bg' || e.target.id === 'logout-no-btn' || e.target.className === 'logout-delete-close') {
     logoutDeleteModal.classList.remove('show');
   }
 
-  if(e.target.id === 'logout-yes-btn'){
-
+  if (e.target.id === 'logout-yes-btn') {
     logoutDeleteModal.classList.remove('show');
-
 
     arr = [];
     filterList = [];
 
     //데이터 삭제
-  localStorage.removeItem('name');
-  localStorage.removeItem('list');
-  //폼 숨기기
-  loginForm.classList.remove('hidden');
-  hiddenLogin.classList.add('hidden');
-  $form.classList.remove('hidden');
-  //데이터 초기화
-  userId.textContent = "";
-  $logInput.value = "";
-  setTimeout( function () {
+    localStorage.removeItem('name');
+    localStorage.removeItem('list');
+    //폼 숨기기
+    loginForm.classList.remove('hidden');
+    hiddenLogin.classList.add('hidden');
+    $form.classList.remove('hidden');
+    //데이터 초기화
+    userId.textContent = "";
+    $logInput.value = "";
+    setTimeout(function () {
       $logInput.focus();
     }, 50);
-    
-  render();
 
+    render();
   }
 })
 
-
 function init() {
-
   $logInput.style.width = '100%';
-  
-  setTimeout( function () {
-      $logInput.focus();
-    }, 50);
+
+  setTimeout(function () {
+    $logInput.focus();
+  }, 50);
 
   let currentName = JSON.parse(localStorage.getItem('name'));
-  
-  if(currentName !== null){
+
+  if (currentName !== null) {
     loginForm.classList.add('hidden');
     $form.classList.add('hidden');
     hiddenLogin.classList.remove('hidden');

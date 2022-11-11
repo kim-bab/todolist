@@ -42,26 +42,15 @@ let weeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', '
 let days = document.querySelector('.day');
 let dates = document.querySelector('.date');
 
-
-
 addBtn.addEventListener('click', addBtnBox);
 inputText.addEventListener('click', inputEnterBox);
-
-
-
-function init(){
-  calrendarRender(); //달력
-}
-
-init();
-
 
 //달력
 function calrendarRender(){
   days.textContent = `${weeks[day]}`;
   dates.textContent = `${date < 10 ? '0'+date : date}`;
 }
-
+calrendarRender();
 
 //할일 추가 이벤트리스너
 addTaskModalBtn.addEventListener('click', () => {
@@ -72,13 +61,11 @@ addTaskModalBtn.addEventListener('click', () => {
     }, 50);
 })
 
-
 //할일 추가 입력값 50이 넘으면 비활성화
 inputText.addEventListener('keyup', () => {
   let valueLength = inputText.value.length;
 
   document.querySelector('#text').focus();
-
 
   if(valueLength > 50){
     addBtn.classList.add('btn-disabled');
@@ -94,27 +81,12 @@ inputText.addEventListener('keyup', () => {
 });
 
 
-
 //엔터키 활성화
 function inputEnterBox(e) {
   if (e.keyCode === 13) {
     addBtnBox();
-    // showLoginUser();
   }
 }
-
-// const profile = ['woman-1.png', 'man-1.png']
-
-// //프로필 랜덤 사진 보여주기
-// function profileRandomImg() {
-//   let index = Math.floor(Math.random() * profile.length);
-
-//   profileImg.innerHTML = `<img src="${profile[index]}" alt="">`;
-// }
-
-// profileRandomImg();
-
-
 
 let arr = [];
 let dataId = 'all';
@@ -130,11 +102,8 @@ function localCheck() {
 //all이면 render <-전체
 //doing이면 check한 것만
 //done이면 삭제한 것만
-
 function render(id) {
-
   let list = [];
-
 
   // //화면 출력 시, 새로고침 시
   let localItem = JSON.parse(localStorage.getItem('list'));
@@ -145,7 +114,6 @@ function render(id) {
   else { //localStorage에 key값이 있다면
     arr = localItem; //arr에 input입력한, 입력했던 값을 보여주자
   }
-
 
   if (dataId == 'all') {
     let doList = arr.filter((test)=>{
@@ -163,7 +131,6 @@ function render(id) {
       }
     })
   }
-  
   
   let result = '';
   
@@ -191,8 +158,6 @@ function render(id) {
 
 document.querySelector(".list_box").innerHTML = result; //ui에 보여주자
 
-  
-
   if (arr.length > 15) { //arr길이가 15이 넘는다면
     addTaskModalBtn.disabled = true;
     addTaskModalBtn.style.backgroundColor = '#a7a7a7';
@@ -212,16 +177,13 @@ document.querySelector(".list_box").innerHTML = result; //ui에 보여주자
 
   document.querySelector('.ing_task').textContent =  `${tasks.length} / ${arr.length}`;
 }
-
 render();
-
 
 tabs.forEach((onTabs) => {
   onTabs.addEventListener('click', function (event) {
     filter(event);
   });
 });
-
 
 //추가버튼 클릭시
 function addBtnBox() {
@@ -231,7 +193,6 @@ function addBtnBox() {
     edit: false,
     isComplete: false
   }
-
 
   arr.push(user);
   inputLength.textContent = 0;
@@ -260,12 +221,10 @@ inputDelete.addEventListener('click', function(e) {
   inputText.focus();
 });
 
-
 //전체 초기화
 totalDelete.addEventListener('click', function() {
   modal.classList.add('show');
 });
-
 
 //전체삭제 확인여부 모달창
 modal.addEventListener('click', (e) => {
@@ -281,16 +240,14 @@ modal.addEventListener('click', (e) => {
     filterList = [];
 
     localStorage.removeItem('list');
-    console.log(arr,filterList);
     render();
     modal.classList.remove('show');
+    modal.classList.add('hidden');
   }
 })
 
-
 //삭제버튼 클릭시
 function deleteList(id) {
-
   arr.forEach((items) => {
     if (id == items.id) { //랜덤아이디와 내가 클릭한 아이디가 같다면
       let index = arr.indexOf(items); //클릭한 items이 몇번째에 있는지 변수에 저장한 후
@@ -301,11 +258,8 @@ function deleteList(id) {
   filter();
 }
 
-
-
 //체크버튼 클릭시
 function checkList(id) {
-
   arr.forEach((items) => {
     if (id == items.id) { //랜덤아이디와 내가 클릭한 아이디가 같다면
         items.isComplete = !items.isComplete; //체크,안체크 스위치
@@ -313,14 +267,10 @@ function checkList(id) {
   })
   localCheck();
   filter();
-
 }
-
-
 
 //순서변경 상위버튼 누르면
 function upBtn(id) {
-
   arr.map((items) => {
     if (id == items.id) {
       console.log(id);
@@ -342,35 +292,6 @@ function upBtn(id) {
   localCheck()
   render();
 }
-
-
-
-// //순서변경 하위버튼 누르면
-// let num;
-// function downBtn(id) {
-
-//   for (let items of arr) {
-//     if (id == items.id) {
-//       console.log(id);
-//       let index = arr.indexOf(items); //리스트 몇번째에 있는지?!
-//       console.log("순서", num);
-
-
-//       if (num >= arr.length - 1) { //최소길이를 넘는다면 초기화
-//         num = arr.length - 1;
-//       }
-
-//       num = num - index;
-
-//       let itm = arr.splice(index, 1)[0];// 바꾸고 싶은 리스트 추출
-//       arr.splice(num, 0, itm); //num자리에, 삭제는 없고 itm으로 이동한다.
-//     }
-//     localCheck();
-//     render();
-//   }
-// }
-
-
 
 //리스트 필터하는 함수
 function filter(event) {
@@ -400,7 +321,6 @@ function filter(event) {
     render();
   }
 }
-
 
 //랜덤 아이디 생성 함수
 function randomID() {
