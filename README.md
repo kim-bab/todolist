@@ -5,7 +5,7 @@
 1. 로그인<br>
 ![image](https://user-images.githubusercontent.com/79827829/201458914-48b69c4a-f08f-41a5-86f7-7fc1b0e0ba87.png)
 
-2. 메인
+2. 메인<br>
 ![project_img](https://user-images.githubusercontent.com/79827829/201458652-3ba27220-79ec-42fe-93ed-1e4dc3e4926f.png)
 
 
