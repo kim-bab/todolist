@@ -1,13 +1,3 @@
-//input의 내용을 가져온다.
-//add버튼을 누르면 화면에 input에 입력한 텍스트를 추가한다.
-//엔터키를 누르면 화면에 input에 입력한 텍스트를 추가한다.
-//랜덤아이디를 생성한다.
-//각 리스트에 랜덤아이디를 부여해 존재를 구별한다.
-//아이디로 구별하여 해당 리스트를 삭제한다.
-//체크를 하면 isComplete는 true, 아니면 false
-//'↑'를 클릭하면 num의 숫자가 하나씩 감소하면서 순서가 바뀐다.
-//let order = arr.splice(from, 1)[0] (자기자신 값)과 arr.splice(to, 0, order)을 이용해 배열 순서를 바꾼다.
-
 const container = document.querySelector('.container');
 const addBtn = document.querySelector('.task_btn');
 const inputText = document.querySelector('#text');
@@ -20,9 +10,7 @@ const all = document.querySelector('#all');
 const done = document.querySelector('#done');
 const taskAddModal = document.querySelector('.task_add_modal');
 const addTaskModalBtn = document.querySelector('.add-btn');
-let inputLength = document.querySelector('.input_length');
-
-
+const inputLength = document.querySelector('.input_length');
 
 //전체삭제 모달 변수
 const modal = document.querySelector('.delete-modal');
@@ -30,17 +18,15 @@ const modalBg = document.querySelector('.delete-bg');
 const yesBtn = document.querySelector('.yes-btn');
 const noBtn = document.querySelector('.no-btn');
 
-
 //날짜 변수
-let isToday = new Date();
+const isToday = new Date();
 
-let date = isToday.getDate();
-let day = isToday.getDay();
+const date = isToday.getDate();
+const day = isToday.getDay();
+const weeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-let weeks = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-let days = document.querySelector('.day');
-let dates = document.querySelector('.date');
+const days = document.querySelector('.day');
+const dates = document.querySelector('.date');
 
 addBtn.addEventListener('click', addBtnBox);
 inputText.addEventListener('click', inputEnterBox);
@@ -64,7 +50,6 @@ addTaskModalBtn.addEventListener('click', () => {
 //할일 추가 입력값 50이 넘으면 비활성화
 inputText.addEventListener('keyup', () => {
   let valueLength = inputText.value.length;
-
   document.querySelector('#text').focus();
 
   if(valueLength > 50){
@@ -77,7 +62,6 @@ inputText.addEventListener('keyup', () => {
   }
 
   inputLength.textContent = valueLength;
-
 });
 
 
@@ -98,10 +82,6 @@ function localCheck() {
   localStorage.setItem('list', JSON.stringify(arr));//저장하기
 }
 
-//각 아이디에 맞춰서 새배열에 필터를 해준다.
-//all이면 render <-전체
-//doing이면 check한 것만
-//done이면 삭제한 것만
 function render(id) {
   let list = [];
 
@@ -156,9 +136,16 @@ function render(id) {
     }
   })
 
-document.querySelector(".list_box").innerHTML = result; //ui에 보여주자
+  document.querySelector(".list_box").innerHTML = result; //ui에 보여주자
 
-  if (arr.length > 15) { //arr길이가 15이 넘는다면
+  arrMaxLength();
+  countTaskList();
+}
+render();
+
+
+function arrMaxLength () {
+  if (arr.length > 15) {
     addTaskModalBtn.disabled = true;
     addTaskModalBtn.style.backgroundColor = '#a7a7a7';
     addBtn.removeEventListener('click', addBtnBox); //리스트 추가 이벤트를 삭제하자
@@ -167,23 +154,18 @@ document.querySelector(".list_box").innerHTML = result; //ui에 보여주자
   else {
     addTaskModalBtn.disabled = false;
     addTaskModalBtn.style.backgroundColor = '#3338f7';
-    addBtn.addEventListener('click', addBtnBox); //리스트를 계속 추가하자
+    addBtn.addEventListener('click', addBtnBox);
     inputText.addEventListener('keyup', inputEnterBox);
   }
+}
 
+function countTaskList() {
   const tasks = arr.filter((items) => { //끝나지 않은 리스트 개수를 새서 하단에 표시해 주자
-      return items.isComplete == false;
+    return items.isComplete == false;
   })
 
-  document.querySelector('.ing_task').textContent =  `${tasks.length} / ${arr.length}`;
+  document.querySelector('.ing_task').textContent = `${tasks.length} / ${arr.length}`;
 }
-render();
-
-tabs.forEach((onTabs) => {
-  onTabs.addEventListener('click', function (event) {
-    filter(event);
-  });
-});
 
 //추가버튼 클릭시
 function addBtnBox() {
@@ -202,8 +184,9 @@ function addBtnBox() {
   taskAddModal.classList.add('hidden');
 }
 
+//리스트 추가 이벤트
 taskAddModal.addEventListener('click', (e) => {
-  let targetId = e.target;
+  const targetId = e.target;
 
   if(targetId.className === 'task_modal_bg' || targetId.className === 'task_xbtn'){
     taskAddModal.classList.add('hidden');
@@ -249,7 +232,7 @@ modal.addEventListener('click', (e) => {
 //삭제버튼 클릭시
 function deleteList(id) {
   arr.forEach((items) => {
-    if (id == items.id) { //랜덤아이디와 내가 클릭한 아이디가 같다면
+    if (id == items.id) {
       let index = arr.indexOf(items); //클릭한 items이 몇번째에 있는지 변수에 저장한 후
       arr.splice(index, 1); //index부터 1만큼 삭제한다(자기자신 삭제)
     }
@@ -273,12 +256,9 @@ function checkList(id) {
 function upBtn(id) {
   arr.map((items) => {
     if (id == items.id) {
-      console.log(id);
       let index = arr.indexOf(items); //true로 선택한 리스트가 몇번째에 있는지?!
-      console.log("순서2: ", index);
 
       let num = index - 1;
-      console.log("흠: ", num);
       if (index < 1) { //최소길이를 넘는다면 초기화
         index = 0;
         num = 0;
@@ -301,13 +281,12 @@ function filter(event) {
   }
   filterList = [];
 
-  if (dataId == "all") { //all일 때
+  if (dataId == "all") {
     document.querySelector('#done').classList.remove('choose');
     document.querySelector('#all').classList.add('choose');
-
     render();
   }
-  else if (dataId == "done") { //done일 때
+  else if (dataId == "done") {
     document.querySelector('#all').classList.remove('choose');
     document.querySelector('#done').classList.add('choose');
     
@@ -317,10 +296,16 @@ function filter(event) {
         return items
       }
     })
-    
     render();
   }
 }
+
+tabs.forEach((onTabs) => {
+  onTabs.addEventListener('click', function (event) {
+    filter(event);
+  });
+});
+
 
 //랜덤 아이디 생성 함수
 function randomID() {

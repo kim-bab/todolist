@@ -1,7 +1,7 @@
 const loginForm = document.querySelector('.login-form');
 const $form = document.querySelector('.todo-form');
 const loginSubmit = document.querySelector('.login-submit');
-const hiddenLogin = document.querySelector('.container');
+const hiddenLoginBox = document.querySelector('.container');
 const userId = document.querySelector('.user-id');
 const $logInput = document.querySelector('#login-input');
 const logOut = document.querySelector('.logout');
@@ -33,7 +33,7 @@ $form.addEventListener('submit', (event) => {
   else if (currentName !== null) { // localStorage에 key값이 이미 들어있다면
     loginForm.classList.add('hidden');
     $form.classList.add('hidden');
-    hiddenLogin.classList.remove('hidden'); //ui에 안보이게 처리하고
+    hiddenLoginBox.classList.remove('hidden'); //ui에 안보이게 처리하고
     userId.textContent = currentName; //input에 입력한 값을 ui에 뿌려주자
   }
 
@@ -42,8 +42,7 @@ $form.addEventListener('submit', (event) => {
 })
 
 
-//로그아웃 클릭시
-function logOutBox() {
+function logOutClickBox() {
   logoutDeleteModal.classList.add('show');
 }
 
@@ -64,7 +63,7 @@ logoutDeleteModal.addEventListener('click', (e) => {
     localStorage.removeItem('list');
     //폼 숨기기
     loginForm.classList.remove('hidden');
-    hiddenLogin.classList.add('hidden');
+    hiddenLoginBox.classList.add('hidden');
     $form.classList.remove('hidden');
     //데이터 초기화
     userId.textContent = "";
@@ -89,12 +88,12 @@ function init() {
   if (currentName !== null) {
     loginForm.classList.add('hidden');
     $form.classList.add('hidden');
-    hiddenLogin.classList.remove('hidden');
+    hiddenLoginBox.classList.remove('hidden');
   }
   userId.textContent = currentName; //값이 있다면 먼저 보여주자
 
   $logInput.addEventListener('keyup', onlyText);
-  logOut.addEventListener('click', logOutBox);
+  logOut.addEventListener('click', logOutClickBox);
 }
 
 init();
